@@ -14,7 +14,8 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    int picID, sndID, nRan, nRan2, nView, rightCount, totalCount;
+    int picID, sndID, nRan, nRan2, nView, nPrcnt;
+    float fScore, fRight, fTotal;
     ImageButton imbA1, imbA2, imbA3, imbA4;
     Button btnSnd;
     String[] arsAnml = {"chicken", "cow", "dog", "goose", "lion", "snake", "tiger"};
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 nView = 3;
             }
             if (nView == nRan2) {
-                rightCount++;
+                fRight++;
                 tCor.show();
                 mNoise.stop();
                 mNoise.release();
@@ -101,9 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 Refresh();
                 btnSnd.performClick();
             }
-            totalCount++;
-            sScore = rightCount + " / " + totalCount;
-            txtScore.setText(sScore);
+            fTotal++;
+            showScore();
         }
     };
 
@@ -119,5 +119,12 @@ public class MainActivity extends AppCompatActivity {
         sndID = getResources().getIdentifier(arsKeep[nRan2], "raw", getPackageName());
         mNoise = MediaPlayer.create(getApplicationContext(), sndID);
         mNoise.start();
+    }
+
+    public void showScore() {
+        fScore = fRight / fTotal * 100;
+        nPrcnt = (int) (fScore+0.5);
+        sScore = Integer.toString(nPrcnt) + "%";
+        txtScore.setText(sScore);
     }
 }
