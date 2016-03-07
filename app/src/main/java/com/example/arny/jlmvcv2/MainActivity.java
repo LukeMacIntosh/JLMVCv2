@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     int picID, sndID, nRan, nRan2, nView, rightCount, totalCount;
     ImageButton imbA1, imbA2, imbA3, imbA4;
-    Button btnCh, btnSnd;
+    Button btnSnd;
     String[] arsAnml = {"chicken", "cow", "dog", "goose", "lion", "snake", "tiger"};
     String[] arsKeep;
     String sScore;
@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         txtScore = (TextView) findViewById(R.id.tvScore);
 
-        btnCh = (Button) findViewById(R.id.btn1);
-        btnCh.setOnClickListener(Change);
-
         btnSnd = (Button) findViewById(R.id.btn2);
         btnSnd.setOnClickListener(Sound);
 
@@ -57,12 +54,11 @@ public class MainActivity extends AppCompatActivity {
         tCor = Toast.makeText(getApplicationContext(), "Correct!", Toast.LENGTH_SHORT);
         tBad = Toast.makeText(getApplicationContext(), "Wrong!", Toast.LENGTH_SHORT);
 
-        btnCh.performClick();
+        Refresh();
         btnSnd.performClick();
     }
 
-    View.OnClickListener Change = new View.OnClickListener() {
-        public void onClick(View v) {
+    public void Refresh() {
             listAnml = new ArrayList(Arrays.asList(arsAnml));
             nRan2 = (int) Math.floor(Math.random() * 4);
             imbA1.setBackgroundResource(getRes(0));
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             imbA3.setBackgroundResource(getRes(2));
             imbA4.setBackgroundResource(getRes(3));
         }
-    };
+
 
     View.OnClickListener Sound = new View.OnClickListener() {
         @Override
@@ -96,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 tCor.show();
                 mNoise.stop();
                 mNoise.release();
-                btnCh.performClick();
+                Refresh();
                 btnSnd.performClick();
             } else {
                 tBad.show();
                 mNoise.stop();
                 mNoise.release();
-                btnCh.performClick();
+                Refresh();
                 btnSnd.performClick();
             }
             totalCount++;
