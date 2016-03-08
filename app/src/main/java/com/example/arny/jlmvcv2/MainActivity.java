@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    int picID, sndID, nRan, nRan2, nView, nPrcnt;
+    int nPicID, nSndID, nRan, nRan2, nView, nPrcnt;
     float fScore, fRight, fTotal;
     ImageButton imbA1, imbA2, imbA3, imbA4;
     Button btnSnd;
@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Refresh() {
-            listAnml = new ArrayList(Arrays.asList(arsAnml));
-            nRan2 = (int) Math.floor(Math.random() * 4);
-            imbA1.setBackgroundResource(getRes(0));
-            imbA2.setBackgroundResource(getRes(1));
-            imbA3.setBackgroundResource(getRes(2));
-            imbA4.setBackgroundResource(getRes(3));
-        }
+        listAnml = new ArrayList(Arrays.asList(arsAnml));
+        nRan2 = (int) Math.floor(Math.random() * 4);
+        imbA1.setBackgroundResource(getRes(0));
+        imbA2.setBackgroundResource(getRes(1));
+        imbA3.setBackgroundResource(getRes(2));
+        imbA4.setBackgroundResource(getRes(3));
+    }
 
 
     View.OnClickListener Sound = new View.OnClickListener() {
@@ -109,21 +109,21 @@ public class MainActivity extends AppCompatActivity {
 
     public int getRes(int nPic) {
         nRan = (int) Math.floor(Math.random() * listAnml.size());
-        picID = getResources().getIdentifier(listAnml.get(nRan), "drawable", getPackageName());
+        nPicID = getResources().getIdentifier(listAnml.get(nRan), "drawable", getPackageName());
         arsKeep[nPic] = listAnml.get(nRan);
         listAnml.remove(nRan);
-        return picID;
+        return nPicID;
     }
 
     public void playSound() {
-        sndID = getResources().getIdentifier(arsKeep[nRan2], "raw", getPackageName());
-        mNoise = MediaPlayer.create(getApplicationContext(), sndID);
+        nSndID = getResources().getIdentifier(arsKeep[nRan2], "raw", getPackageName());
+        mNoise = MediaPlayer.create(getApplicationContext(), nSndID);
         mNoise.start();
     }
 
     public void showScore() {
         fScore = fRight / fTotal * 100;
-        nPrcnt = (int) (fScore+0.5);
+        nPrcnt = (int) (fScore + 0.5);
         sScore = Integer.toString(nPrcnt) + "%";
         txtScore.setText(sScore);
     }
